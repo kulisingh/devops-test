@@ -44,7 +44,7 @@ I created the solution as follows, after doing a bit of research to understand E
 * I created a dockerfile to build the devops example as a container
 * I created 2 separate jenkins projects:
   * Build project, to build the ECS infrastructure, running the following command:
-     * _aws cloudformation deploy --template-file infrastructure/ecs.yml --region eu-west-1  --stack-name ECS-Example --capabilities CAPABILITY_NAMED_IAM _
+     * aws cloudformation deploy --template-file infrastructure/ecs.yml --region eu-west-1  --stack-name ECS-Example --capabilities CAPABILITY_NAMED_IAM
   * Deploy pipeline (added the Jenkinsfile to the repo too)
      * Test stage to run test npm on the command line
      * Prod stage to deploy to cluster if the test worked
