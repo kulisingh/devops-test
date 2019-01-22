@@ -42,7 +42,12 @@ I created the solution as follows, after doing a bit of research to understand E
 * I combined this code and added it to my devops-test repo
 * I added a rule.json file to ensure the deploy script creates a load balancer and target group, using the rule in the file
 * I created a dockerfile to build the devops example as a container
-* I created 2 separate jenkins projects - 1 as a freestyle, to build the ECS infrastructure and one as a Prod build pipeline (added the Jenkinsfile to the repo too)
+* I created 2 separate jenkins projects:
+  * Build project, to build the ECS infrastructure, running the following command:
+     * aws cloudformation deploy --template-file infrastructure/ecs.yml --region eu-west-1  --stack-name ECS-Example --capabilities CAPABILITY_NAMED_IAM
+  * Deploy pipeline (added the Jenkinsfile to the repo too)
+     * Test stage to run test npm on the command line
+     * Prod stage to deploy to cluster if the test worked
 * In order to get jenkins to work I had to do the following:
    * As my jenkins is localhost, I researched and ended up adding a git-commit githook which triggers my Prod jenkins job: _curl -u admin:<my api token> -X POST http://localhost:8080/job/Prod/build?token=apiToken_ 
    * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins use, 
@@ -61,5 +66,21 @@ I created the solution as follows, after doing a bit of research to understand E
 I didn't have time but I would also:
 * Add proper error handling to the the shell scripts running in jenkins
 * I made the triggered Prod deployment pipeline script a proper pipeline (where as the ECS build wasn't) so we could store the jenkinsfile in the repo and call it (rather than inline), but I didn't get round to it.  It is has been added to the repo for reference
+* Add a test stage in the pipeline to run _npm test_ as a dependency before running the production job 
 
+### Notes on the solution
 
+The solution demonstrates the following devops principles:
+* A high degree of automation: the base cloud environment, and the service which is deployed is all scripted using cloudformation and cli commands -> Infrastructure as code
+* The code is fairly simple and easy to change
+* CI/CD principles are exhibited - the Prod build is automatically triggered when changes are pushed up
+* The target environment is load balanced across availability zones
+
+### Notes on further improvemnts
+
+With time I would demonstrate:
+
+* Create multiple environment pipelines, maybe a dev to deploy just to a single docker container too
+* Using a standardise process with different environment variables for each environment
+* The above would allow the SDLC to run in a repeatable and consistent manner, ensuring that we have thoroughly tested the same code all the way to production (docker helps with this too)
+* Have all the jenkins confiuguration as code too
