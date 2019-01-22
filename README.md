@@ -1,4 +1,7 @@
 # DevOps Engineer - Technical Test	
+
+## NOTE: Please see the notes on my solution below - KS
+
 We think infrastructure is best represented as code, and provisioning of resources should be automated as much as possible.	
 
  Your task is to create a CI build pipeline that deploys this web application to a load-balanced	
@@ -26,3 +29,21 @@ Create a public Github repository and push your solution in it. Commit often - w
 
 - `npm test` runs the application tests	- `npm test` runs the application tests
 - `npm start` starts the http server
+
+## KS Solution
+
+I created the solution as follows, after doing a bit of research to understand ECS (as it has been a while):
+
+* Used local Jenkins CI server running in vagrant, which was provisioned using ansible in the past.  The intention was to use this against an ECS Cluster on using my AWS account
+* I used a great example which creates an ECS cluster using cloudformation and then deploys a docker container as a service with an Application Load Balancer
+   * Please see this link: _https://github.com/awslabs/amazon-ecs-nodejs-microservices/tree/master/2-containerized_
+* I adapted this locally to use your example
+* I combined this code and added it to my devops-test repo
+* I created a dockerfile to build the devops example as a container
+* I created 2 separate pipelines - 1 to build the ECS infrastructure and one as a Prod build
+* In order to get jenkins to work I had to do the following:
+   * As my jenkins is localhost, I researched and ended up adding a git-commit githook which triggers my Prod jenkins job: _curl -u admin:<my api token> -X POST http://localhost:8080/job/Prod/build?token=apiToken_ 
+   * I installed npm and docker on my vagrant jenkins server
+
+
+
