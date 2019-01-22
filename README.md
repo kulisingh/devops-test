@@ -34,14 +34,14 @@ Create a public Github repository and push your solution in it. Commit often - w
 
 I created the solution as follows, after doing a bit of research to understand ECS (as it has been a while):
 
-* Used local Jenkins CI server running in vagrant, which was provisioned using ansible in the past.  The intention was to use this against an ECS Cluster on using my AWS account
+* Used local Jenkins CI server running in vagrant, which was provisioned using ansible in the past.  The intention was to use this against an ECS Cluster using my AWS account
 * I forked your devops-test project
-* I used a great example which creates an ECS cluster using cloudformation and then has a script to deploys a docker container as a service with an Application Load Balancer - spent a lot of time familiarising with ECS and the cloudformation stack and deploy.sh script
+* I used a great example which creates an ECS cluster using cloudformation and then has a script to deploy a docker container as a service with an Application Load Balancer - spent a lot of time familiarising with ECS and the cloudformation stack and deploy.sh script
    * Please see this link: _https://github.com/awslabs/amazon-ecs-nodejs-microservices/tree/master/2-containerized_
 * I adapted this locally to use your example
 * I combined this code and added it to my devops-test repo
 * I added a rule.json file to ensure the deploy script creates a load balancer and target group, using the rule in the file
-* I created a dockerfile to build the devops example as a container
+* I created a Dockerfile to build the devops example as a container
 * I created 2 separate jenkins projects:
   * Build project, to build the ECS infrastructure, running the following command:
      * aws cloudformation deploy --template-file infrastructure/ecs.yml --region eu-west-1  --stack-name ECS-Example --capabilities CAPABILITY_NAMED_IAM
@@ -49,7 +49,7 @@ I created the solution as follows, after doing a bit of research to understand E
      * Test stage to run test npm on the command line
      * Prod stage to deploy to cluster if the test worked
 * In order to get jenkins to work I had to do the following:
-   * As my jenkins is localhost, I researched and ended up adding a git-commit githook which triggers my Prod jenkins job: _curl -u admin:<my api token> -X POST http://localhost:8080/job/Prod/build?token=apiToken_ 
+   * As my jenkins is localhost, I researched and ended up adding a git-commit githook which triggers my Prod jenkins job: _curl -u admin:<my api token> -X POST http://localhost:8080/job/deploy/build?token=apiToken_ 
    * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins use, 
    * Now, If I change the app and push up, jenkins automatically starts, and ECS updates its tasks and eventually has a service with the new task version 
 
