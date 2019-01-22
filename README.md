@@ -43,7 +43,14 @@ I created the solution as follows, after doing a bit of research to understand E
 * I created 2 separate pipelines - 1 to build the ECS infrastructure and one as a Prod build
 * In order to get jenkins to work I had to do the following:
    * As my jenkins is localhost, I researched and ended up adding a git-commit githook which triggers my Prod jenkins job: _curl -u admin:<my api token> -X POST http://localhost:8080/job/Prod/build?token=apiToken_ 
-   * I installed npm and docker on my vagrant jenkins server
+   * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins use, 
+   * Now, If I change the app and push up, jenkins automatically starts, and ECS updates its tasks and eventually has a service with the new task version 
 
+(jenkins.png)
+(ecs.png)
+
+I didn't have time but I would also:
+* Add proper error handling to the the shell scripts running in jenkins
+* I made the triggered Prod deployment pipeline script a proper pipeline (where as the ECS build wasn't) so we could store the jenkinsfile in the repo to and call it, but I didn't get round to it.  It is in the repo too tho, just not referenced in the Prod project
 
 
