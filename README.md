@@ -62,4 +62,19 @@ I didn't have time but I would also:
 * Add proper error handling to the the shell scripts running in jenkins
 * I made the triggered Prod deployment pipeline script a proper pipeline (where as the ECS build wasn't) so we could store the jenkinsfile in the repo and call it (rather than inline), but I didn't get round to it.  It is has been added to the repo for reference
 
+### Notes on the solution
 
+The solution demonstrates the following devops principles:
+* A high degree of automation: the base cloud environment, and the service which is deployed is all scripted using cloudformation and cli commands
+* The code is fairly simple and easy to change
+* CI/CD principles are exhibited - the Prod build is automatically triggered when changes are pushed up
+* The target environment is load balanced across availability zones
+
+### Notes on further improvemnts
+
+With time I would demonstrate:
+
+* Create multiple environment pipelines, maybe a dev to deploy just to a single docker container too
+* Using a standardise process with different environment variables for each environment
+* The above would allow the SDLC to run in a repeatable and consistent manner, ensuring that we have thoroughly tested the same code all the way to production (docker helps with this too)
+* Have all the jenkins confiuguration as code too
