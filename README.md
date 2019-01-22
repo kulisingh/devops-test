@@ -47,7 +47,7 @@ I created the solution as follows, after doing a bit of research to understand E
    * Now, If I change the app and push up, jenkins automatically starts, and ECS updates its tasks and eventually has a service with the new task version 
 
 ![jenkins pic](jenkins.png)
-![ECS pic](ecs.png)
+![ECS pic](ECS.png)
 
 I didn't have time but I would also:
 * Add proper error handling to the the shell scripts running in jenkins
