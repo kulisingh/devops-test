@@ -70,7 +70,7 @@ I didn't have time but I would also:
 ### Notes on the solution
 
 The solution demonstrates the following devops principles:
-* A high degree of automation: the base cloud environment, and the service which is deployed is all scripted using cloudformation and cli commands
+* A high degree of automation: the base cloud environment, and the service which is deployed is all scripted using cloudformation and cli commands -> Infrastructure as code
 * The code is fairly simple and easy to change
 * CI/CD principles are exhibited - the Prod build is automatically triggered when changes are pushed up
 * The target environment is load balanced across availability zones
