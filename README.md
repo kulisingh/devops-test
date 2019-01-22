@@ -46,8 +46,8 @@ I created the solution as follows, after doing a bit of research to understand E
    * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins use, 
    * Now, If I change the app and push up, jenkins automatically starts, and ECS updates its tasks and eventually has a service with the new task version 
 
-(jenkins.png)
-(ecs.png)
+![jenkins pic](jenkins.png)
+![ECS pic](ecs.png)
 
 I didn't have time but I would also:
 * Add proper error handling to the the shell scripts running in jenkins
