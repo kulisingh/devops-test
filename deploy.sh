@@ -180,7 +180,7 @@ do
 				--service-name $SERVICE_NAME \
 				--role $ECS_ROLE \
 				--task-definition $TASK_DEFINITION_ARN \
-				--desired-count 1`
+				--desired-count 2`
 		else
 			# This service doesn't have a web interface, just create it without load balancer settings
 			printf "${PRIMARY}* Creating new background service \`${SERVICE_NAME}\`${NC}\n";
@@ -189,7 +189,7 @@ do
 				--cluster $CLUSTER_NAME \
 				--service-name $SERVICE_NAME \
 				--task-definition $TASK_DEFINITION_ARN \
-				--desired-count 1`
+				--desired-count 2`
 		fi
 	else
 		# The service already existed, just update the existing service.
@@ -198,7 +198,8 @@ do
 			--region $REGION \
 			--cluster $CLUSTER_NAME \
 			--service $SERVICE_NAME \
-			--task-definition $TASK_DEFINITION_ARN`
+			--task-definition $TASK_DEFINITION_ARN \
+			--desired-count 2`
 	fi
 done
 
