@@ -35,10 +35,12 @@ Create a public Github repository and push your solution in it. Commit often - w
 I created the solution as follows, after doing a bit of research to understand ECS (as it has been a while):
 
 * Used local Jenkins CI server running in vagrant, which was provisioned using ansible in the past.  The intention was to use this against an ECS Cluster on using my AWS account
-* I used a great example which creates an ECS cluster using cloudformation and then deploys a docker container as a service with an Application Load Balancer
+* I forked your devops-test project
+* I used a great example which creates an ECS cluster using cloudformation and then has a script to deploys a docker container as a service with an Application Load Balancer - spent a lot of time familiarising with ECS and the cloudformation stack and deploy.sh script
    * Please see this link: _https://github.com/awslabs/amazon-ecs-nodejs-microservices/tree/master/2-containerized_
 * I adapted this locally to use your example
 * I combined this code and added it to my devops-test repo
+* I added a rule.json file to ensure the deploy script creates a load balancer and target group, using the rule in the file
 * I created a dockerfile to build the devops example as a container
 * I created 2 separate jenkins projects - 1 as a freestyle, to build the ECS infrastructure and one as a Prod build pipeline (added the Jenkinsfile to the repo too)
 * In order to get jenkins to work I had to do the following:
