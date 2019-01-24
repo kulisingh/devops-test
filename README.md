@@ -49,7 +49,7 @@ I created the solution as follows, after doing a bit of research to understand E
      * Test stage to run test npm on the command line
      * Prod stage to deploy to cluster if the test worked
 * In order to get jenkins to work I had to do the following:
-   * As my jenkins is localhost, I researched and ended up adding a _post-commit_ githook which triggers my Prod jenkins job: _curl -u admin:<user apiToken> -X POST http://localhost:8080/job/Deploy/build?token=<build apiToken>_ 
+   * As my jenkins is localhost, I researched and ended up adding a _post-commit_ githook which triggers my Prod jenkins job: _curl -u admin:\<user apiToken\> -X POST http://localhost:8080/job/Deploy/build?token=\<build apiToken\>_ 
    * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins use, 
    * Now, If I change the app and push up, jenkins automatically starts, and ECS updates its tasks and eventually has a service with the new task version 
 
@@ -76,7 +76,7 @@ The solution demonstrates the following devops principles:
 * CI/CD principles are exhibited - the Prod build is automatically triggered when changes are pushed up
 * The target environment is load balanced across availability zones
 
-### Notes on further improvemnts
+### Notes on further improvements
 
 With time I would demonstrate:
 
