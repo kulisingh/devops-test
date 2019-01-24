@@ -55,7 +55,7 @@ I created the solution as follows, after doing a bit of research to understand E
 
 ### Jenkins - update job running:
 
-![jenkins pic](jenkins.png)
+![jenkins pic](jenkins1.png)
 
 ### ECS - note this is in transition between versions of the code...
 
