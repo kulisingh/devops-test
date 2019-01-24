@@ -49,7 +49,7 @@ I created the solution as follows, after doing a bit of research to understand E
      * Test stage to run test npm on the command line
      * Prod stage to deploy to cluster if the test worked
 * In order to get jenkins to work I had to do the following:
-   * As my jenkins is localhost, I researched and ended up adding a _post-commit_ githook which triggers my Prod jenkins job: _curl -u admin:\<user apiToken\> -X POST http://localhost:8080/job/Deploy/build?token=\<build apiToken\>_ 
+   * As my jenkins is localhost, I researched and ended up adding a _post-commit_ githook which triggers my Prod jenkins job: _curl -u admin:\<apiToken\> -X POST http://localhost:8080/job/Deploy/build?token=<authToken\>_ 
    * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins use, 
    * Now, If I change the app and push up, jenkins automatically starts, and ECS updates its tasks and eventually has a service with the new task version 
 
@@ -71,6 +71,7 @@ I didn't have time but I would also:
 
 The solution demonstrates the following devops principles:
 * A high degree of automation: the base cloud environment, and the service which is deployed is all scripted using cloudformation and cli commands -> Infrastructure as code
+* The deployment job is a driven by a Jenkinsfile loaded directly from Source Control
 * The code is fairly simple and easy to change
 * CI/CD principles are exhibited - the Prod build is automatically triggered when changes are pushed up
 * The target environment is load balanced across availability zones
@@ -82,4 +83,3 @@ With time I would demonstrate:
 * Create multiple environment pipelines, maybe a dev to deploy just to a single docker container too
 * Using a standardise process with different environment variables for each environment
 * The above would allow the SDLC to run in a repeatable and consistent manner, ensuring that we have thoroughly tested the same code all the way to production (docker helps with this too)
-* Have all the jenkins confiuguration as code too
