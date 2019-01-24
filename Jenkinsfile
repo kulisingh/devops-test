@@ -1,10 +1,28 @@
 #!groovy
-stage('Prod') {
-   node() {
+node() {
+   stage('Test') {
+    
+      deleteDir()
+       
+      sh '''
+
+      set -e
+      
+      git clone https://github.com/kulisingh/devops-test
+      
+      cd devops-test/services/api
+      npm test
+      
+      cd ../..
+      
+      '''
+      
+   }
+   stage('Prod') {
        
       sh '''
       
-      git clone https://github.com/kulisingh/devops-test.git
+      set =e
       
       cd devops-test
       
@@ -15,5 +33,7 @@ stage('Prod') {
       '''
       
       deleteDir()
-   }
+   }   
 }   
+A
+
