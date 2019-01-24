@@ -22,7 +22,7 @@ node() {
        
       sh '''
       
-      set =e
+      set -e
       
       cd devops-test
       
