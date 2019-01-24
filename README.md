@@ -64,9 +64,8 @@ I created the solution as follows, after doing a bit of research to understand E
 ## To Do
 
 I didn't have time but I would also:
-* Add proper error handling to the the shell scripts running in jenkins
+* Add proper error handling to the the shell scripts running in jenkins (although the -e option should work but need to test that the build stops e.g. if test fails)
 * I made the triggered Prod deployment pipeline script a proper pipeline (where as the ECS build wasn't) so we could store the jenkinsfile in the repo and call it (rather than inline), but I didn't get round to it.  It is has been added to the repo for reference
-* Add a test stage in the pipeline to run _npm test_ as a dependency before running the production job 
 
 ### Notes on the solution
 
