@@ -47,7 +47,13 @@ I created the solution as follows, after doing a bit of research to understand E
      * aws cloudformation deploy --template-file infrastructure/ecs.yml --region eu-west-1  --stack-name ECS-Example --capabilities CAPABILITY_NAMED_IAM
   * Deploy pipeline (added the Jenkinsfile to the repo too)
      * Test stage to run test npm on the command line
-     * Prod stage to deploy to cluster if the test worked
+     * Prod stage to deploy to cluster if the test worked:
+       * Build docker image
+       * Push image to ECR
+       * Create ALB with rule if not already done
+       * Create new version of task using new image
+       * Deploy to cluster
+       
 * In order to get jenkins to work I had to do the following:
    * As my jenkins is localhost, I researched and ended up adding a _post-commit_ githook which triggers my Prod jenkins job: _curl -u admin:\<apiToken\> -X POST http://localhost:8080/job/Deploy/build?token=<authToken\>_ 
    * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins use, 
