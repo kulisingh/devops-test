@@ -43,20 +43,20 @@ I created the solution as follows, after doing a bit of research to understand E
 * I added a rule.json file to ensure the deploy script creates a load balancer and target group, using the rule in the file
 * I created a Dockerfile to build the devops example as a container
 * I created 2 separate jenkins projects:
-  * Build project, to build the ECS infrastructure, running the following command:
+  * Build project, to build the ECS infrastructure, running the following command to deploy the cloudformation stack:
      * aws cloudformation deploy --template-file infrastructure/ecs.yml --region eu-west-1  --stack-name ECS-Example --capabilities CAPABILITY_NAMED_IAM
   * Deploy pipeline (added the Jenkinsfile to the repo too)
      * Test stage to run test npm on the command line
      * Prod stage to deploy to cluster if the test worked:
-       * Build docker image
-       * Push image to ECR
-       * Create ALB with rule if not already done
-       * Create new version of task using new image
-       * Deploy to cluster
+       * Build docker image from latest code in repo
+       * Push docker image to ECR
+       * Create new task definition using docker image
+       * If not present, create a new Service, Target Group, Rule, Listener and Application Load Balancer
+       * Update service with latest task definition, and a desired count of 2
        
 * In order to get jenkins to work I had to do the following:
    * As my jenkins is localhost, I researched and ended up adding a _post-commit_ githook which triggers my Prod jenkins job: _curl -u admin:\<apiToken\> -X POST http://localhost:8080/job/Deploy/build?token=<authToken\>_ 
-   * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins use, 
+   * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins user, 
    * Now, If I change the app and push up, jenkins automatically starts, and ECS updates its tasks and eventually has a service with the new task version 
 
 ### Jenkins - update job running:
