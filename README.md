@@ -54,9 +54,9 @@ I created the solution as follows, after doing a bit of research to understand E
        * If not present, create a new Service, Target Group, Rule, Listener and Application Load Balancer
        * Update service with latest task definition, and a desired count of 2
        
-* In order to get jenkins to work I had to do the following:
+* In order to get jenkins triggering to work I had to do the following:
    * As my jenkins is localhost, I researched and ended up adding a _post-commit_ githook which triggers my Prod jenkins job: _curl -u admin:\<apiToken\> -X POST http://localhost:8080/job/Deploy/build?token=<authToken\>_ 
-   * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins user, 
+   * I installed npm and docker on my vagrant jenkins server and added the docker group to the jenkins user
    * Now, If I change the app and push up, jenkins automatically starts, and ECS updates its tasks and eventually has a service with the new task version 
 
 ### Jenkins - update job running:
