@@ -32,8 +32,7 @@ Create a public Github repository and push your solution in it. Commit often - w
 
 ## KS Solution
 
-I created the solution as follows, after doing a bit of research to understand ECS (as it has been a while):
-
+I created the solution as follows, after doing a bit of research to understand ECS (as it has been a whil
 * Used local Jenkins CI server running in vagrant, which was provisioned using ansible in the past.  The intention was to use this against an ECS Cluster using my AWS account
 * I forked your devops-test project
 * I used a great example which creates an ECS cluster using cloudformation and then has a script to deploy a docker container as a service with an Application Load Balancer - spent a lot of time familiarising with ECS and the cloudformation stack and deploy.sh script
@@ -42,6 +41,7 @@ I created the solution as follows, after doing a bit of research to understand E
 * I combined this code and added it to my devops-test repo
 * I added a rule.json file to ensure the deploy script creates a load balancer and target group, using the rule in the file
 * I created a Dockerfile to build the devops example as a container
+* I added a .gitignore file to ignore the node_modules directory
 * I created 2 separate jenkins projects:
   * Build project, to build the ECS infrastructure, running the following command to deploy the cloudformation stack:
      * aws cloudformation deploy --template-file infrastructure/ecs.yml --region eu-west-1  --stack-name ECS-Example --capabilities CAPABILITY_NAMED_IAM
