@@ -45,7 +45,7 @@ I created the solution as follows, after doing a bit of research to understand E
 * I created 2 separate jenkins projects:
   * Build project, to build the ECS infrastructure, running the following command to deploy the cloudformation stack:
      * aws cloudformation deploy --template-file infrastructure/ecs.yml --region eu-west-1  --stack-name ECS-Example --capabilities CAPABILITY_NAMED_IAM
-  * Deploy pipeline (added the Jenkinsfile to the repo too)
+  * Deploy pipeline which uses the Jenkinsfile from this repo:
      * Test stage to run test npm on the command line
      * Prod stage to deploy to cluster if the test worked:
        * Build docker image from latest code in repo
@@ -66,12 +66,6 @@ I created the solution as follows, after doing a bit of research to understand E
 ### ECS - note this is in transition between versions of the code...
 
 ![ECS pic](ECS.png)
-
-## To Do
-
-I didn't have time but I would also:
-* Add proper error handling to the the shell scripts running in jenkins (although the -e option should work but need to test that the build stops e.g. if test fails)
-* I made the triggered Prod deployment pipeline script a proper pipeline (where as the ECS build wasn't) so we could store the jenkinsfile in the repo and call it (rather than inline), but I didn't get round to it.  It is has been added to the repo for reference
 
 ### Notes on the solution
 
