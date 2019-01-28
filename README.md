@@ -32,7 +32,7 @@ Create a public Github repository and push your solution in it. Commit often - w
 
 ## KS Solution
 
-I created the solution as follows, after doing a bit of research to understand ECS (as it has been a whil
+I created the solution as follows, after doing a bit of research to understand ECS (as it has been a while)
 * Used local Jenkins CI server running in vagrant, which was provisioned using ansible in the past.  The intention was to use this against an ECS Cluster using my AWS account
 * I forked your devops-test project
 * I used a great example which creates an ECS cluster using cloudformation and then has a script to deploy a docker container as a service with an Application Load Balancer - spent a lot of time familiarising with ECS and the cloudformation stack and deploy.sh script
