@@ -1,8 +1,6 @@
 #!groovy
 node() {
    stage('Test') {
-    
-      deleteDir()
        
       sh '''
 
